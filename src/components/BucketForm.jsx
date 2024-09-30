@@ -4,9 +4,10 @@ function BucketForm(props) {
   const [input, setInput] = useState('');
   let [eagerness, setEagerness] = useState('');
 
-  // TODO: Use this array in the return statement below
-  const eagernessLevel = ['high', 'medium', 'low']
+  // Eagerness levels
+  const eagernessLevel = ['high', 'medium', 'low'];
 
+  // Handles the submit event when adding a bucket list item
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -24,12 +25,17 @@ function BucketForm(props) {
     setEagerness('');
   };
 
+  // Handles input change in the text box
   const handleChange = (e) => {
     setInput(e.target.value);
   };
 
-  // First we check to see if "edit" prop exists. If not, we render the normal form
-  // If the prop "edit" exists, we know to render the update form instead
+  // Handle click event for setting eagerness
+  const handleEagernessClick = (level) => {
+    setEagerness(level); // Set the eagerness level based on the user's choice
+  };
+
+  // If "edit" prop exists, we render the update form instead of the add form
   return !props.edit ? (
     <div>
       <form className="bucket-form" onSubmit={handleSubmit}>
@@ -40,16 +46,16 @@ function BucketForm(props) {
           name="text"
           className="bucket-input"
           onChange={handleChange}
-        ></input>
+        />
         <div className="dropdown">
           <button className={`dropbtn ${eagerness}`}>
             {eagerness || 'Priority'}
           </button>
           <div className="dropdown-content">
-            {/* TODO: Add an onClick event that will set the corresponding eagerness level from the `eagernessLevel` array */}
-            <p onClick={}>Must do</p>
-            <p onClick={}>Want to do</p>
-            <p onClick={}>Take it or leave it</p>
+            {/* Update eagerness onClick */}
+            <p onClick={() => handleEagernessClick('high')}>Must do</p>
+            <p onClick={() => handleEagernessClick('medium')}>Want to do</p>
+            <p onClick={() => handleEagernessClick('low')}>Take it or leave it</p>
           </div>
         </div>
         <button className="bucket-button">Add bucket list item</button>
@@ -66,16 +72,15 @@ function BucketForm(props) {
           name="text"
           className="bucket-input"
           onChange={handleChange}
-        ></input>
+        />
         <div className="dropdown">
           <button className={`dropbtn ${eagerness}`}>
             {eagerness || 'Priority'}
           </button>
           <div className="dropdown-content">
-            {/* TODO: Add an onClick event that will set the corresponding eagerness level from the `eagernessLevel` array */}
-            <p onClick={}>Must do</p>
-            <p onClick={}>Want to do</p>
-            <p onClick={}>Take it or leave it</p>
+            <p onClick={() => handleEagernessClick('high')}>Must do</p>
+            <p onClick={() => handleEagernessClick('medium')}>Want to do</p>
+            <p onClick={() => handleEagernessClick('low')}>Take it or leave it</p>
           </div>
         </div>
         <button className="bucket-button">Update</button>
